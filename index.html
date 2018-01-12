@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="user-scalable=1.0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+
+  <title>pell</title>
+
+  <link rel="stylesheet" type="text/css" href="dist/pell.css">
+
+  <style>
+    body {
+      background-color: antiquewhite;
+      margin: 0;
+      padding: 0;
+    }
+
+    .content {
+      box-sizing: border-box;
+      margin: 0 auto;
+      max-width: 600px;
+      max-height: 600px;
+      padding: 3px;
+    }
+
+    #html-output {
+      white-space: pre-wrap;
+    }
+  </style>
+
+</head>
+
+<body>
+  <section style="-webkit-app-region: no-drag">
+    <button type="button" id="maxbt">max</button>
+    <button type="button" id="minbt">min</button>
+    <button type="button" id="closebt">close</button>
+  </section>
+  <div class="content" style="-webkit-app-region: drag">
+    <!-- <h1>pell</h1> -->
+    <div id="pell" class="pell"></div>
+    <!-- <div style="margin-top:20px;">
+        <h3>Text output:</h3>
+        <div id="text-output"></div>
+      </div> -->
+    <!-- <div style="margin-top:20px;">
+        <h3>HTML output:</h3>
+        <pre id="html-output"></pre>
+      </div> -->
+  </div>
+  <div>
+    <input type="file" id="files" style="display:inline" onchange="imports();" />
+    <input type="button" id="import" value="导出" />
+  </div>
+
+  <script src="dist/pell.js"></script>
+  <script>
+    function ensureHTTP(str) {
+      return /^https?:\/\//.test(str) && str || `http://${str}`
+    }
+
+    var editor = window.pell.init({
+      element: document.getElementById('pell'),
+      styleWithCSS: false,
+      actions: [
+        'bold',
+        'underline',
+        'italic',
+        {
+          name: 'imdiv',
+          icon: '<div class=\'mdiv\'>T</div>',
+          title: 'imdiv',
+          result: function result() {
+            alert('imdiv')
+          }
+        },
+        {
+          name: 'zitalic',
+          icon: 'Z',
+          title: 'Zitalic',
+          result: () => window.pell.exec('italic')
+        },
+      ]
+      // ],
+      // onChange: function (html) {
+      //   document.getElementById('text-output').innerHTML = html
+      //   document.getElementById('html-output').textContent = html
+      // }
+    })
+  </script>
+  <script src='./my_src/renderer.js'></script>
+  <script>
+      // require('electron').ipcRenderer;
+       // You can also require other files to run in this process
+       //require('./my_src/renderer.js')
+  </script>
+</body>
+
+</html>
